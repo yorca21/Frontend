@@ -1,0 +1,106 @@
+.wrapper {
+    width: 100%;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(5px);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    color: #fff;
+}
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-box {
+    width: 100%;
+    color: #fff;
+    background: transparent;
+    padding: 15px 10px 10px 50px; 
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.icon {
+    position: absolute;
+    right: 10px;
+    top: 65%;
+    transform: translateY(-50%);
+    color: #171616;
+    transition: opacity 0.2s ease-in-out;
+}
+.icon.hidden{
+    opacity: 0;
+}
+
+.remember-fotgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.remember-fotgot label {
+    display: flex;
+    align-items: center;
+}
+
+.remember-fotgot a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.remember-fotgot a:hover {
+    text-decoration: underline;
+}
+
+button {
+    align-self: center;
+    width: 100px;
+    padding: 10px;
+    background:transparent;
+    color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(184, 184, 255);
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-link p {
+    margin: 0;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}

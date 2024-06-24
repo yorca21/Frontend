@@ -1,0 +1,91 @@
+.home {
+    display: flex;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar {
+    background-color: #333;
+    width: 250px;
+    height: 100vh;
+    transition: transform 0.3s ease;
+    transform: translateX(-250px);
+}
+
+.menu-open .sidebar {
+    transform: translateX(0); 
+}
+
+.sidebar-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+    color: white;
+    height: 60px;
+    cursor: pointer;
+}
+
+.sidebar-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.menu-open .sidebar-toggle .bar:first-child {
+    transform: rotate(-45deg) translate(-4px, 5px);
+}
+
+.menu-open .sidebar-toggle .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-open .sidebar-toggle .bar:last-child {
+    transform: rotate(45deg) translate(-4px, -5px);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.menu li {
+    margin-bottom: 10px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+
+.menu a:hover {
+    background-color: #555;
+}
+
+.submenu {
+    position: relative;
+}
+
+.submenu .submenu-toggle {
+    cursor: pointer;
+}
+
+.submenu-content {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #444;
+    padding: 10px;
+}
+
+.submenu:hover .submenu-content {
+    display: block;
+}
