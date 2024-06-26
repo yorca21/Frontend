@@ -15,7 +15,7 @@ const Home = ({ menuOpen, toggleMenu }) => {
             path: '/' 
         },
         isAuthenticated && { 
-            text: 'Users', 
+            text: 'Register Users', 
             icon: <PersonIcon />, 
             path: '/admin/users' 
         },
