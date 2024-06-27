@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import authService from '../services/authService';
+import authService from '../../services/authService';
 import { FaUserTie, FaLock } from 'react-icons/fa';
-import '../styles/loginStyles.css';
+import './loginStyles.css';
 
 const Login = ({ onLogin }) => {
     const [username, setUsername] = useState('');

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemText, ListItemIcon, IconButton, Divider } from '@mui/material';
 import { Home as HomeIcon, Person as PersonIcon, Settings as SettingsIcon, Menu as MenuIcon } from '@mui/icons-material';
-import '../styles/homeStyles.css';
+import './homeStyles.css';
 
 const Home = ({ menuOpen, toggleMenu }) => {
    
@@ -15,7 +15,7 @@ const Home = ({ menuOpen, toggleMenu }) => {
             path: '/' 
         },
         isAuthenticated && { 
-            text: 'Register Users', 
+            text: 'Users', 
             icon: <PersonIcon />, 
             path: '/admin/users' 
         },
