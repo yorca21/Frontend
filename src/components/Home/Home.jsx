@@ -1,11 +1,18 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Drawer, List, ListItem, ListItemText, ListItemIcon, IconButton, Divider } from '@mui/material';
-import { Home as HomeIcon, Person as PersonIcon, Settings as SettingsIcon, Menu as MenuIcon } from '@mui/icons-material';
+import { Drawer, Collapse ,List, ListItem, ListItemText, ListItemIcon, IconButton, Divider } from '@mui/material';
+import { Home as HomeIcon, Person as PersonIcon, Settings as SettingsIcon, Menu as MenuIcon, ExpandLess , ExpandMore,  List as ListIcon, Add as AddIcon } from '@mui/icons-material';
 import './homeStyles.css';
 
 const Home = ({ menuOpen, toggleMenu }) => {
    
+    const [openUsers, setOpenUsers] = useState(false );
+    
+    const handleToggleUsers = () => {
+        setOpenUsers(!openUsers);
+    };
+
     const isAuthenticated = localStorage.getItem('token') !== null;
 
     const menuItems = [
@@ -15,14 +22,25 @@ const Home = ({ menuOpen, toggleMenu }) => {
             path: '/' 
         },
         isAuthenticated && { 
-            text: 'Users', 
-            icon: <PersonIcon />, 
-            path: '/admin/users' 
+            text: ' Users', 
+            icon: <PersonIcon />,
+            subMenu: [
+                { 
+                    text: 'User List', 
+                    path: '/admin/users/list',
+                    icon: < ListIcon/> 
+                },
+                { 
+                    text: 'Register Users', 
+                    path: '/admin/users/register',
+                    icon: < AddIcon/>
+                }
+            ] 
         },
         isAuthenticated && { 
-            text: 'Settings', 
+            text: 'Tools', 
             icon: <SettingsIcon />, 
-            path: '/admin/settings' 
+            path: '/admin/Tools' 
         },
     ].filter(Boolean);
 
@@ -37,10 +55,31 @@ const Home = ({ menuOpen, toggleMenu }) => {
                 <Divider />
                 <List>
                     {menuItems.map((item, index) => (
-                        <ListItem button component={Link} to={item.path} key={index} onClick={toggleMenu}>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
+                    <div key={index}>
+                        <ListItem button onClick={
+                                item.subMenu ? 
+                                handleToggleUsers : toggleMenu
+                            }
+                            component={ item.subMenu ? 'div' : Link } 
+                            to={ item.subMenu ?  '#' : item.path }
+                        >
+                        <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText primary={item.text} />
+                            {item.subMenu ? (openUsers ? <ExpandLess /> : <ExpandMore />) : null}
                         </ListItem>
+                            {item.subMenu && (
+                                <Collapse in={openUsers} timeout='auto' unmountOnExit>
+                                    <List component='div' disablePadding>
+                                        {item.subMenu.map((subItem, subIndex) => (
+                                            <ListItem button component={Link} to={subItem.path} key={subIndex} onClick={toggleMenu}>
+                                                <ListItemIcon>{subItem.icon}</ListItemIcon>
+                                                <ListItemText inset primary={subItem.text} />
+                                            </ListItem>
+                                        ))}
+                                    </List>
+                                </Collapse>
+                            )}
+                    </div>
                     ))}
                 </List>
             </Drawer>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter,  Navigate,  Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
-import Register from './components/Register';
+import UserForm from './components/Forms/formUsers/registerForm';
 import CustomAppBar from './helpers/AppBar'
 import ProtectedRoute from './helpers/protectedRouter';
 
@@ -48,7 +48,11 @@ function App() {
                             <Navigate to = '/'/> : 
                             <Login onLogin={handleLogin}/>
                         }/>
-                        <Route path='/register' element ={<Register/>}/>
+                       <Route path='/admin/users/register' 
+                            element={
+                                <ProtectedRoute 
+                                    isAuthenticated={isAuthenticated}><UserForm  menuOpen={menuOpen} toggleMenu={toggleMenu} />
+                                </ProtectedRoute>} /> 
                     </Routes>
                 </div>
             </BrowserRouter>            

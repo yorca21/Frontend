@@ -7,7 +7,11 @@ const getUsers = () => {
 };
 
 const getUserById = (userId) => {
-    return axios.get(API_URL + userId);
+    return axios.get(`${API_URL}${userId}`);
+};
+
+const getUserByUsername = (username) => {
+    return axios.get(`${API_URL}username/${username}`);
 };
 
 const createUser = (userData) => {
@@ -15,16 +19,17 @@ const createUser = (userData) => {
 };
 
 const updateUser = (userId, userData) => {
-    return axios.put(API_URL + userId, userData);
+    return axios.put(`${API_URL}${userId}`, userData);
 };
 
 const deleteUser = (userId) => {
-    return axios.delete(API_URL + userId);
+    return axios.delete(`${API_URL}${userId}`);
 };
 
 export default {
     getUsers,
     getUserById,
+    getUserByUsername,
     createUser,
     updateUser,
     deleteUser
