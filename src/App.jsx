@@ -3,6 +3,7 @@ import { BrowserRouter,  Navigate,  Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import UserForm from './components/Forms/formUsers/registerForm';
+import UserList from './components/User/userList';
 import CustomAppBar from './helpers/AppBar'
 import ProtectedRoute from './helpers/protectedRouter';
 
@@ -53,7 +54,13 @@ function App() {
                                 <ProtectedRoute 
                                     isAuthenticated={isAuthenticated}><UserForm  menuOpen={menuOpen} toggleMenu={toggleMenu} />
                                 </ProtectedRoute>} /> 
+                        <Route path='/admin/users/list' 
+                            element={
+                                <ProtectedRoute 
+                                    isAuthenticated={isAuthenticated}><UserList  menuOpen={menuOpen} toggleMenu={toggleMenu} />
+                                </ProtectedRoute>} /> 
                     </Routes>
+                    
                 </div>
             </BrowserRouter>            
         </div>

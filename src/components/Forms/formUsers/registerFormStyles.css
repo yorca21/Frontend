@@ -39,16 +39,14 @@
 }
 
 .submit-button {
-    background-color: rgba(255, 255, 255, 0.8);
-    color: #eaedf0; 
+    background-color: transparent;
+    color: #007bff;
     border: 1px solid #007bff;
-    &:hover {
-        background-color: #007bff;
-        color: #fff;
-    }
 }
-
-/* Nuevos estilos para dos columnas */
+.submit-button:hover {
+    background-color: #007bff;
+    color: #fff;
+}
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -58,12 +56,10 @@
 .full-width {
     grid-column: span 2;
 }
-.button{
-    background-color: rgba(255, 255, 255, 0.8)
-}
 .button-container {
     grid-column: span 2;
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.8)
 }

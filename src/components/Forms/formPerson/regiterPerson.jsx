@@ -4,23 +4,15 @@ import { TextField, Button, Container, Typography, Grid, IconButton, InputAdornm
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import './registerFormStyles.css';  
 
-const UserForm = () => {
+const PersonForm = () => {
     const [formData, setFormData] = useState({
-        username: '',
-        password: '',
-        person: '',
-        unit: '',
-        role: ''
+        firstName: '',
+        lastName: '',
+        cI:'',
+        phone:'',
+        email:'',
+        address: '',
     });
-    const [showPassword, setShowPassword] =useState(false);
-    
-    useEffect(() => {
-        
-        window.addEventListener('beforeunload', handleBeforeUnload);
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-        };
-    }, []);
 
     const handleBeforeUnload = (e) => {
         e.preventDefault();
@@ -43,11 +35,12 @@ const UserForm = () => {
             console.log('User created successfully:', response.data);
 
             setFormData({
-                username: '',
-                password: '',
-                person: '',
-                unit: '',
-                role: ''
+                firstName: '',
+                lastName: '',
+                cI:'',
+                phone:'',
+                email:'',
+                address: '',
             });
         } catch (error) {
             console.error('Error creating user:', error);

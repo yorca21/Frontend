@@ -1,0 +1,17 @@
+
+.dialog-title {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.dialog-content {
+    padding: 20px;
+}
+
+.text-field {
+    margin-bottom: 10px;
+}
+
+.dialog-actions {
+    justify-content: space-between;
+}
