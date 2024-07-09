@@ -45,7 +45,7 @@ const UserList = () => {
 
     return (
         <Container className='container'>
-            <Button variant="contained" color="primary" onClick={fetchUsers} className='button'>
+            <Button variant='contained' color='primary' onClick={fetchUsers} className='button'>
                 Get Users
             </Button>
             <TextField
