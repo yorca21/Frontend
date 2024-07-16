@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter,  Navigate,  Route, Routes } from 'react-router-dom';
-import Home from './components/Home/Home';
+import Menu from './components/Home/menu'; 
 import Login from './components/Login/Login';
 import UserForm from './components/Forms/formUsers/registerForm';
 import UserList from './components/User/userList';
-import CustomAppBar from './helpers/AppBar'
+import AppBar from './helpers/AppBar'
 import ProtectedRoute from './helpers/protectedRouter';
+import RegisterPerson from './components/Forms/formPerson/regiterPerson';
+import RegisterUnit from './components/Forms/formUnits/registerUnit';
+import RegisterRole from './components/Forms/formRoles/registerRole';
+import RegisterPermission from './components/Forms/formPermissions/registerPermission';
 
+import './styles/styles.css'
 
 function App() {
     
@@ -32,33 +37,80 @@ function App() {
     return (
         <div>            
             <BrowserRouter>
-                <CustomAppBar 
+                <AppBar 
                     isAuthenticated={isAuthenticated}
                     onLogout={handleLogout} 
                     toggleMenu={toggleMenu} 
                 />
+                <Menu menuOpen={menuOpen} toggleMenu={toggleMenu}/>
                 <div style={{marginTop: '64px'}}>
                     <Routes>
                         <Route path='/' element={
                             <ProtectedRoute isAuthenticated={isAuthenticated}>
-                                <Home menuOpen={menuOpen} toggleMenu={toggleMenu} />
+                                <div className='center-content'> bienvenidos a home</div>
                             </ProtectedRoute>
                         } />
                         <Route path='/login' element ={
                             isAuthenticated ? 
                             <Navigate to = '/'/> : 
-                            <Login onLogin={handleLogin}/>
+                            <div className='center-content'><Login onLogin={handleLogin}/></div>
+                            
                         }/>
                        <Route path='/admin/users/register' 
                             element={
                                 <ProtectedRoute 
-                                    isAuthenticated={isAuthenticated}><UserForm  menuOpen={menuOpen} toggleMenu={toggleMenu} />
+                                    isAuthenticated={isAuthenticated}>
+                                    <div className='center-content'>
+                                        <UserForm  menuOpen={menuOpen} toggleMenu={toggleMenu} />
+
+                                    </div>
+                                        
                                 </ProtectedRoute>} /> 
                         <Route path='/admin/users/list' 
                             element={
                                 <ProtectedRoute 
-                                    isAuthenticated={isAuthenticated}><UserList  menuOpen={menuOpen} toggleMenu={toggleMenu} />
+                                    isAuthenticated={isAuthenticated}>
+                                    <div className='center-contet'>
+                                        <UserList  menuOpen={menuOpen} toggleMenu={toggleMenu} />
+                                    </div>
+                                   
                                 </ProtectedRoute>} /> 
+                            <Route path='/register-person' 
+                                element={
+                                    <ProtectedRoute 
+                                        isAuthenticated={isAuthenticated}>
+                                        <div className='center-contet'>
+                                            <RegisterPerson menuOpen={menuOpen} toggleMenu={toggleMenu} />
+                                        </div>                                  
+                                    </ProtectedRoute>}
+                            /> 
+                            <Route path='/register-unit' 
+                                element={
+                                    <ProtectedRoute 
+                                        isAuthenticated={isAuthenticated}>
+                                        <div className='center-contet'>
+                                            <RegisterUnit menuOpen={menuOpen} toggleMenu={toggleMenu} />
+                                        </div>                                  
+                                    </ProtectedRoute>}
+                            /> 
+                            <Route path='/register-role' 
+                                element={
+                                    <ProtectedRoute 
+                                        isAuthenticated={isAuthenticated}>
+                                        <div className='center-contet'>
+                                            <RegisterRole menuOpen={menuOpen} toggleMenu={toggleMenu} />
+                                        </div>                                  
+                                    </ProtectedRoute>}
+                            /> 
+                            <Route path='/register-permission' 
+                                element={
+                                    <ProtectedRoute 
+                                        isAuthenticated={isAuthenticated}>
+                                        <div className='center-contet'>
+                                            <RegisterPermission menuOpen={menuOpen} toggleMenu={toggleMenu} />
+                                        </div>                                  
+                                    </ProtectedRoute>}
+                            /> 
                     </Routes>
                     
                 </div>

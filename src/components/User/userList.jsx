@@ -44,7 +44,8 @@ const UserList = () => {
     );
 
     return (
-        <Container className='container'>
+        <div className='center-content'>
+            <Container className='container'>
             <Button variant='contained' color='primary' onClick={fetchUsers} className='button'>
                 Get Users
             </Button>
@@ -86,6 +87,7 @@ const UserList = () => {
                 )
             }
         </Container>
+        </div>
     );
 };
 

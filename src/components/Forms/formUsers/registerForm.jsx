@@ -4,10 +4,8 @@ import unitService from '../../../services/unitService';
 import personService from '../../../services/personService';
 import permissionService from '../../../services/permissionService';
 import roleService from '../../../services/roleService';
-import { Form , Button, Container, Col, Row, SelectPicker, Stack } from 'rsuite';
+import { Form , Button, Container, Col, Row, SelectPicker, Stack, Grid } from 'rsuite';
 import { TagPicker } from 'rsuite';
-/*import VisibleIcon from '@rsuite/icons/Visible';
-import UnvisibleIcon from '@rsuite/icons/Unvisible';*/
 import 'rsuite/dist/rsuite.min.css';
 
 
@@ -26,7 +24,7 @@ const UserForm = () => {
         role:[] , 
         permissions:[] 
     });
-    const [showPassword,/*setShowPassword*/] = useState(false);
+    const [showPassword] = useState(false);
     
     useEffect(() => {
         
@@ -78,8 +76,8 @@ const UserForm = () => {
         setShowPassword(!showPassword);
     };*/
 
-     const handleSubmit = async (e) => {
-        e.preventDefault();
+     const handleSubmit = async () => {
+       
         if (confirm('¿Está seguro de registrar?')) {
             try {
                 const response = await userService.createUser(formData);
@@ -104,91 +102,95 @@ const UserForm = () => {
 
     return (
 
-            <Container>
-                <Row>
-                    <Col>
-                        <h4>Registro de Usuario</h4>
-                         
-                        <Form  onSubmit={handleSubmit}>
-                            <Form.Group controlId='username'>
-                                <Form.ControlLabel>Nombre de Usuario</Form.ControlLabel>
-                                <Form.Control 
-                                    name='username' 
-                                    type='text' 
-                                    autoComplete='off' 
-                                    value={formData.username} 
-                                    onChange={handleChange} 
-                                />
-                            </Form.Group>
+     
+      <Container>
+        <Grid>
+             <Row>
+                <Col xs={8}/>
+                <Col xs={8}  >
+                    <h4>Registro de Usuario</h4>
+                    <Form  onSubmit={handleSubmit}>
+                        <Form.Group controlId='username'>
+                            <Form.ControlLabel>Nombre de Usuario</Form.ControlLabel>
+                            <Form.Control 
+                                name='username' 
+                                type='text' 
+                                autoComplete='off' 
+                                value={formData.username} 
+                                onChange={handleChange} 
+                            />
+                        </Form.Group>
 
-                            <Form.Group controlId='password'>
-                                <Form.ControlLabel>Password</Form.ControlLabel>
-                                <Form.Control
-                                    name='password'
-                                    type={showPassword ? 'text' : 'password'}
-                                    autoComplete='off'
-                                    value={formData.password}
-                                    onChange={ handleChange}
-                            
-                                />
-                            </Form.Group>
-                            <Form.Group controlId='people'>
-                                <Form.ControlLabel>Persona</Form.ControlLabel>
-                                <Stack spacing={10} direction='column' alignItems='flex-start'>
-                                    <SelectPicker data={people.map((person) => (
-                                        {
-                                            label: `${person.firstName} ${person.lastName}`,
-                                            value: person._id,
-                                        }
-                                    ))}  style={{ width: 224}} value={formData.person} onChange={(value, event) => handleChange2(value, 'person', event )} name = 'person' />
-                                </Stack>
-                                <Form.HelpText>Seleccione la persona para el usuario</Form.HelpText>                                
-                            </Form.Group>
-
-                            <Form.Group controlId='units'>
-                                <Form.ControlLabel>Unidad</Form.ControlLabel>
-                                <Stack spacing={10} direction='column' alignItems='flex-start'>
-                                    <SelectPicker data={units.map((unit) => (
-                                            {
-                                                label: unit.name,
-                                                value: unit._id,
-                                            }
-                                        ))} style={{ width: 224 }} value={formData.unit} onChange={(value, event) => handleChange2(value, 'unit', event)} name='unit'  />
-                                </Stack>
-                                <Form.HelpText>Seleccione una Unidad</Form.HelpText>
-                            </Form.Group>
-
-                            <Form.Group controlId='role'>
-                                <Form.ControlLabel>Roles</Form.ControlLabel>
-                                    <TagPicker data={roles.map((role) => (
-                                        {
-                                            label: role.name,
-                                            value: role._id,
-                                        }
-                                    ))} style={{ width: 300 }} value={formData.role} onChange={(value, event) => handleChange2(value, 'roles', event)} name='roles' />     
-                                    
-                            </Form.Group>
-
-                            <Form.Group controlId='permission'>
-                                <Form.ControlLabel>Permisos</Form.ControlLabel>
-                                <TagPicker data={permissions.map((permission) => (
+                        <Form.Group controlId='password'>
+                            <Form.ControlLabel>Password</Form.ControlLabel>
+                            <Form.Control
+                                name='password'
+                                type={showPassword ? 'text' : 'password'}
+                                autoComplete='off'
+                                value={formData.password}
+                                onChange={ handleChange}
+                        
+                            />
+                        </Form.Group>
+                        <Form.Group controlId='people'>
+                            <Form.ControlLabel>Persona</Form.ControlLabel>
+                            <Stack spacing={10} direction='column' alignItems='flex-start'>
+                                <SelectPicker data={people.map((person) => (
                                     {
-                                        label: permission.name,
-                                        value: permission._id,
+                                        label: `${person.firstName} ${person.lastName}`,
+                                        value: person._id,
                                     }
-                                ))} style={{ width: 300 }} value={formData.permissions} onChange={(value, event) => handleChange2(value, 'permissions', event)} name='permissions' />
-                            
-                            </Form.Group>
-                            <Form.Group>
-                                <Button type='submit' appearance='primary'>
-                                          Registrar 
-                                </Button>
-                            </Form.Group>
-                        </Form>
-                    </Col>
-                </Row>
-            
-            </Container>
+                                ))}  style={{ width: 224}} value={formData.person} onChange={(value, event) => handleChange2(value, 'person', event )} name = 'person' />
+                            </Stack>
+                            <Form.HelpText>Seleccione la persona para el usuario</Form.HelpText>                                
+                        </Form.Group>
+
+                        <Form.Group controlId='units'>
+                            <Form.ControlLabel>Unidad</Form.ControlLabel>
+                            <Stack spacing={10} direction='column' alignItems='flex-start'>
+                                <SelectPicker data={units.map((unit) => (
+                                        {
+                                            label: unit.name,
+                                            value: unit._id,
+                                        }
+                                    ))} style={{ width: 224 }} value={formData.unit} onChange={(value, event) => handleChange2(value, 'unit', event)} name='unit'  />
+                            </Stack>
+                            <Form.HelpText>Seleccione una Unidad</Form.HelpText>
+                        </Form.Group>
+
+                        <Form.Group controlId='role'>
+                            <Form.ControlLabel>Roles</Form.ControlLabel>
+                                <TagPicker data={roles.map((role) => (
+                                    {
+                                        label: role.name,
+                                        value: role._id,
+                                    }
+                                ))} style={{ width: 300 }} value={formData.role} onChange={(value, event) => handleChange2(value, 'role', event)} name='roles' />     
+                                
+                        </Form.Group>
+
+                        <Form.Group controlId='permission'>
+                            <Form.ControlLabel>Permisos</Form.ControlLabel>
+                            <TagPicker data={permissions.map((permission) => (
+                                {
+                                    label: permission.name,
+                                    value: permission._id,
+                                }
+                            ))} style={{ width: 300 }} value={formData.permissions} onChange={(value, event) => handleChange2(value, 'permissions', event)} name='permissions' />
+                        
+                        </Form.Group>
+                        <Form.Group>
+                            <Button type='submit' appearance='primary'>
+                                        Registrar 
+                            </Button>
+                        </Form.Group>
+                    </Form>
+                </Col>
+            </Row>
+        </Grid>
+               
+     </Container>
+
     );
 };
 

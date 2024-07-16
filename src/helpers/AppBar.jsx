@@ -1,44 +1,47 @@
+import { Container, Header, Navbar, Nav, IconButton } from 'rsuite';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar, IconButton, Typography, Button } from '@mui/material';
-import { Menu as MenuIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import MenuIcon from '@rsuite/icons/Menu';
 
-const CustomAppBar = ({ isAuthenticated, onLogout, toggleMenu }) => {
-    
-    const navigate = useNavigate();
+const AppBar = ({ isAuthenticated, onLogout, toggleMenu }) => {
+  const navigate = useNavigate();
 
-    const handleLogin = () => {
-        navigate('/login');
-    };
+  const handleLogin = () => {
+    navigate('/login');
+  };
 
-    const handleLogout = () => {
-        
-        onLogout();
-        navigate('/');
-    };
+  const handleLogout = () => {
+    onLogout();
+    navigate('/');
+  };
 
-    return (
-        <AppBar position='fixed' style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
-            <Toolbar>
-                <IconButton edge='start' color='inherit' aria-label='menu' onClick={toggleMenu}>
-                    <MenuIcon />
-                </IconButton>
-                <Typography variant='h6' style={{ flexGrow: 1 }}>
-                    Gestion
-                </Typography>
-                {isAuthenticated ? (
-                    <Button color='inherit' onClick={handleLogout}>Logout</Button>
-                ) : (
-                    <Button color='inherit' onClick={handleLogin}>Login</Button>
-                )}
-            </Toolbar>
-        </AppBar>
-    );
-};
-CustomAppBar.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-    onLogout: PropTypes.func.isRequired,
-    toggleMenu: PropTypes.func.isRequired,
+  return (
+    <div className='homepage'>
+      <Container>
+        <Header>
+          <Navbar appearance='inverse' style={{ marginBottom: '20px' }}>
+            <Navbar.Brand>
+              <IconButton  appearance= 'link' icon={<MenuIcon />} onClick={toggleMenu} />
+              <a style={{ color: '#fff' }}>Gestion</a>
+            </Navbar.Brand>
+            <Nav pullRight>
+              {isAuthenticated ? (
+                <Nav.Item onClick={handleLogout}>Logout</Nav.Item>
+              ) : (
+                <Nav.Item onClick={handleLogin}>Login</Nav.Item>
+              )}
+            </Nav>
+          </Navbar>
+        </Header>
+      </Container>
+    </div>
+  );
 };
 
-export default CustomAppBar;
+AppBar.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  onLogout: PropTypes.func.isRequired,
+  toggleMenu: PropTypes.func.isRequired,
+};
+
+export default AppBar;
