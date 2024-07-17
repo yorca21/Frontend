@@ -3,6 +3,7 @@ import permissionService from '../../../services/permissionService';
 import { Form, Button, Container, Col, Row, Notification, useToaster, TagPicker, Grid } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css';
 import Textarea from '../../../helpers/Textarea';
+import roleService from '../../../services/roleService';
 
 const RegisterRole = () => {
     const [permissions, setPermissions] = useState([]);
@@ -41,7 +42,7 @@ const RegisterRole = () => {
     const handleSubmit = async () => {
         if (confirm('¿Está seguro de registrar?')) {
             try {
-                const response = await permissionService.createPermission(formData);
+                const response = await roleService.createRole(formData);
                 if (response) {
                     alert('El registro se ha completado.');
                     setFormData({
@@ -62,8 +63,8 @@ const RegisterRole = () => {
     <Container>
         <Grid>
             <Row >
-                <Col xs={8}/>
-                <Col xs= {8}>
+                <Col xs={4}/>
+                <Col xs= {12}>
                     <h4>Registro de Roles</h4>
                     <Form fluid onSubmit={handleSubmit}>
                         <Form.Group controlId='name'>
@@ -99,8 +100,8 @@ const RegisterRole = () => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <Button appearance='primary'>Enviar</Button>
-                            <Button appearance='default'>Cancelar</Button>
+                            <Button appearance='primary'  type='submit'>Enviar</Button>
+                            <Button appearance='default' type='button'>Cancelar</Button>
                         </Form.Group>
                     </Form>
                 </Col>

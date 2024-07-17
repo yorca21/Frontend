@@ -1,34 +1,81 @@
 import { Form, ButtonToolbar, Button, Grid, Row, Col } from 'rsuite';
 import Textarea from '../../../helpers/Textarea';
+import permissionService from '../../../services/permissionService';
+import { useState } from 'react';
 
-const RegisterPermission = () => (
-  <Grid>
-    <Row>
-      <Col xs={8} />
-      <Col>
-        <Form>
+const RegisterPermission = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    description: ''
+  });
+
+  const handleChange = (value, name) => {
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async () => {
+    
+    if (confirm('¿Está seguro realizar el registro?')) {
+      try {
+        const response = await permissionService.createPermission(formData);
+        if (response) {
+          alert('El registro se ha completado.');
+          setFormData({
+            name: '',
+            description: '',
+          });
+        } else {
+          alert('No se recibió una respuesta válida del servidor.');
+        }
+      } catch (error) {
+        alert(error.response?.data?.msg || 'Error en el registro');
+      }
+    }
+  };
+
+  return (
+    <Grid>
+      <Row>
+        <Col xs={8} />
+        <Col xs={10}>
+          <h4>Registro de Permisos</h4>
+          <Form fluid onSubmit={handleSubmit}>
             <Form.Group controlId='name'>
               <Form.ControlLabel>Nombre</Form.ControlLabel>
-              <Form.Control name='name' />
+              <Form.Control
+                name='name'
+                type='text'
+                value={formData.name}
+                onChange={(value) => handleChange(value, 'name')}
+              />
               <Form.HelpText>El nombre es requerido</Form.HelpText>
             </Form.Group>
             <Form.Group controlId='description'>
               <Form.ControlLabel>Descripción</Form.ControlLabel>
-              <Form.Control rows={5} name='description' accepter={Textarea} />
+              <Form.Control
+                rows={5}
+                name='description'
+                accepter={Textarea}
+                value={formData.description}
+                onChange={(value) => handleChange(value, 'description')}
+              />
               <Form.HelpText>La descripción es requerida</Form.HelpText>
             </Form.Group>
             <Form.Group>
               <ButtonToolbar>
-                <Button appearance='primary'>Enviar</Button>
-                <Button appearance='default'>Cancelar</Button>
+                <Button appearance='primary' type='submit'>Enviar</Button>
+                <Button appearance='default' type='button'>Cancelar</Button>
               </ButtonToolbar>
             </Form.Group>
-        </Form>
-      </Col>
-    </Row>
-  </Grid>
-);
-
+          </Form>
+        </Col>
+      </Row>
+    </Grid>
+  );
+};
 
 RegisterPermission.displayName = 'RegisterPermission';
 
